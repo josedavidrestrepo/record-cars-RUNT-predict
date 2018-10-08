@@ -1,4 +1,6 @@
 library(shiny)
+library(DT)
+library(sqldf)
 
 server <- function(input, output) {
   
