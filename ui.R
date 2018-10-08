@@ -17,11 +17,24 @@ ui <- dashboardPage(
     tabItems(
       tabItem(tabName = "predicts",
               fluidRow(
-                box(plotOutput("plot1", height = 250)),
-                
-                box(
-                  title = "Controls",
-                  sliderInput("slider", "Number of observations:", 1, 100, 50)
+                column(width = 5,
+                  box(status = "warning", width = 12,
+                      dateRangeInput('dateRange',
+                                     label = 'Seleccione un rango de fechas para las cuáles desea predecir el número de vehículos registrados diariamente en el Registro Único Nacional de Tránsito (RUNT).',
+                                     start = Sys.Date() - 15, end = Sys.Date() + 15,
+                                     # min = Sys.Date() - 10, max = Sys.Date() + 10,
+                                     separator = "hasta", format = "dd/mm/yyyy",
+                                     startview = 'year', language = 'es', weekstart = 1
+                      )
+                  ),
+                  box(width = 12,
+                      "Lista de días"
+                  )
+                ),
+                column(width = 7,
+                       box ( width = 12,
+                             "Variables y predicción"
+                       )
                 )
               )
       ),
