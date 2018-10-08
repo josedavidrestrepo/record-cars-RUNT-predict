@@ -9,7 +9,8 @@ ui <- dashboardPage(
       menuItem("Reporte técnico", tabName = "report", icon = icon("briefcase", lib = "glyphicon")),
       menuItem("Video Promocional", tabName = "video", icon = icon("facetime-video", lib = "glyphicon")),
       menuItem("Archivos planos", tabName = "files", icon = icon("save-file", lib = "glyphicon")),
-      menuItem("Acerca", tabName = "about", icon = icon("info-sign", lib = "glyphicon"))
+      menuItem("Código fuente", icon = icon("file-code-o"), href = "https://github.com/josedavidrestrepo/record-cars-RUNT-predict"),
+      menuItem("Acerca de", tabName = "about", icon = icon("info-sign", lib = "glyphicon"))
     )
   ),
   dashboardBody(
@@ -45,7 +46,8 @@ ui <- dashboardPage(
                   tags$li("Jose Alejandro Aristizabal Hoyos - jaaristizabalh@unal.edu.co"),
                   tags$li("Santiago Alvarez Soto - saalvarezso@unal.edu.co")
                 ),
-                tags$h3("No dudes en contactarnos si tienes alguna duda que podamos resolverte, o para que nos compartas tus necesidades y hacerte una solución a tu medida.")
+                tags$br(),
+                tags$h4("No dudes en contactarnos si tienes alguna duda que podamos resolverte, o para que nos compartas tus necesidades y hacerte una solución a tu medida.")
                 
               )
       )
