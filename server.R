@@ -1,6 +1,14 @@
 library(shiny)
 library(DT)
 library(sqldf)
+library(xts)
+library(lubridate)
+
+datos <-read.csv("predicciones.csv", header=T, sep=";")
+
+datos$fecha <- parse_date_time(datos$fecha, "%d-%m-%Y")
+
+datos$fecha <- as.Date(datos$fecha)
 
 server <- function(input, output) {
   
@@ -12,19 +20,9 @@ server <- function(input, output) {
     as.character(input$dateRange[1])
   })
   
-  output$table <- renderDataTable({
-    query_dias <- paste("SELECT fecha AS Fecha FROM autos WHERE fecha >= '", as.character(input$dateRange[1]), sep="")
-    query_dias <- paste(query_dias, "' AND fecha <= '", sep="")
-    query_dias <- paste(query_dias, as.character(input$dateRange[2]), sep="")
-    query_dias <- paste(query_dias, "'", sep="")
+  output$highchart <- renderHighchart({
+    rango <- datos[datos$fecha >= input$dateRange[1] & datos$fecha <= input$dateRange[2],]
     
-    autos_data_set <- sqldf(query_dias, dbname = "db")
-    
-    datatable(
-      autos_data_set, rownames = FALSE,
-      options = list(lengthChange = FALSE, dom = 'tlipr'),
-      selection = list(mode = 'single', target = 'row', selected = c(1)),
-      filter = 'bottom'
-    ) %>% formatStyle(0, cursor = 'pointer')
+    hchart(xts(rango$unidades, rango$fecha))
   })
 }

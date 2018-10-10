@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(DT)
+library(highcharter)
 
 ui <- dashboardPage(
   dashboardHeader(title = "RUNT - Predicciones"),
@@ -18,26 +19,18 @@ ui <- dashboardPage(
     tabItems(
       tabItem(tabName = "predicts",
               fluidRow(
-                column(width = 4,
-                  box(status = "warning", width = 12,
+                  box(status = "warning", width = 5,
                       dateRangeInput('dateRange',
                                      label = 'Seleccione un rango de fechas para las cuáles desea predecir el número de vehículos registrados diariamente en el Registro Único Nacional de Tránsito (RUNT).',
-                                     start = "2012-01-01", end = "2017-12-31",
-                                     # min = Sys.Date() - 10, max = Sys.Date() + 10,
+                                     start = "2018-01-01", end = "2018-06-30",
+                                     min = "2018-01-01", max = "2018-06-30",
                                      separator = "hasta", format = "yyyy/mm/dd",
                                      startview = 'year', language = 'es', weekstart = 1
                       )
                   ),
                   box(width = 12,
-                      DTOutput("table")
+                      highchartOutput("highchart", height = "500px")
                   )
-                ),
-                column(width = 8,
-                       box ( width = 12,
-                             "Variables y predicción",
-                             verbatimTextOutput("dateRangeText")
-                       )
-                )
               )
       ),
       tabItem(tabName = "report",
