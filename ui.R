@@ -5,6 +5,7 @@ library(highcharter)
 
 ui <- dashboardPage(
   dashboardHeader(title = "RUNT - Predicciones"),
+  skin = "purple",
   dashboardSidebar(
     sidebarMenu(
       menuItem("Predicciones", tabName = "predicts", icon = icon("calendar", lib = "glyphicon")),
@@ -23,7 +24,7 @@ ui <- dashboardPage(
                       dateRangeInput('dateRange',
                                      label = 'Seleccione un rango de fechas para las cuáles desea predecir el número de vehículos registrados diariamente en el Registro Único Nacional de Tránsito (RUNT).',
                                      start = "2018-01-01", end = "2018-06-30",
-                                     min = "2018-01-01", max = "2018-06-30",
+                                     min = "2012-01-01", max = "2018-06-30",
                                      separator = "hasta", format = "yyyy/mm/dd",
                                      startview = 'year', language = 'es', weekstart = 1
                       )
@@ -34,13 +35,20 @@ ui <- dashboardPage(
               )
       ),
       tabItem(tabName = "report",
-              includeHTML("reporte.html")
+               includeHTML("reporte.html")
       ),
       tabItem(tabName = "video",
+              titlePanel("Video Promocional"),
               htmlOutput("frame")
       ),
-      tabItem(tabName = "files"
-
+      tabItem(tabName = "files",
+          titlePanel("Archivos Planos"),
+          sidebarPanel(
+            selectInput("dataset", "Seleccione el conjunto de datos:",
+                        choices = c("2012-2016", "2017", "2018-01")),
+            downloadButton("downloadData", "Descargar")
+          ),
+          tableOutput('table')
       ),
       tabItem(tabName = "about",
               tags$div(

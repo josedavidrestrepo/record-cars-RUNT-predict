@@ -5,8 +5,8 @@ account: tae-2018-2
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 499603
-bundleId: 1633719
+bundleId: 1645038
 url: https://tae-2018-2.shinyapps.io/RUNT-predict/
-when: 1539151363.99142
+when: 1539667642.89902
 asMultiple: FALSE
 asStatic: FALSE
